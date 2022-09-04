@@ -1,6 +1,8 @@
 import React, {useState} from 'react' 
 import ValidatedInput from './ValidatedInput';
 
+const REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
 const FormInput = (props) => {
     const {
         firstName,
@@ -34,8 +36,8 @@ const FormInput = (props) => {
                 value={email}
                 setValue={setEmail}
                 label={"Email:"}
-                errorMessage={"Your email must be valid and have at least 2 characters."}
-                hasError={(v) => !v.includes("@") || !v.includes(".com") || v.length < 2}
+                errorMessage={"Your email must be valid."}
+                hasError={(v) => !REGEX.test(v)}
             />
             <ValidatedInput 
                 value={password}
